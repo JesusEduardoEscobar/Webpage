@@ -1,0 +1,85 @@
+body {
+  font-family: Arial, sans-serif;
+  background-image: url("https://png.pngtree.com/background/20211216/original/pngtree-agricultural-planting-greenhouse-vegetables-photographs-picture-image_1522905.jpg");
+  background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #263868;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #91b2f8;
+}
+
+#adminCodeField {
+  display: none;
+  margin-top: 20px;
+}
+
+label {
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.radio {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-mensaje-exito {
+  font-size: 14px;
+  color: #119200;
+  display: none;
+}
+
+.form-mensaje-exito-activo {
+  display: block;
+}

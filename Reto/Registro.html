@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estiloRegistro.css">
+    <title>Selección de Usuario</title>
+</head>
+<body>
+    <div class="container">
+        <form id="userForm">
+            <fieldset>
+            <fieldset>
+            <div class="row">
+                <h1 class="texto">Registrate</h1>
+                <div class="column">
+                    <!-- Selecccion del tipo de usuario -->
+                    <label for="userType">Seleccione el tipo de usuario:</label>
+                    <br>
+                    <div class="radio-container">
+                        <select name="userType" id="userType" onchange="mostrar(this)">
+                            <option value="Seleccionar">Seleccionar</option>
+                            <option value="Usuario">Usuario</option>
+                            <option value="Admin">Administrador</option>
+                        </select>
+                        <p class="userForm-input-error">Seleccione un tipo de usuario</p>
+                    </div>
+
+                    <!-- Campos para el usuario -->
+                    <div class="userForm-group" id="group-user">
+                        <label for="username">Nombre de Usuario</label>
+                        <input type="text" id="username" name="username" placeholder="Ingrese su nombre de usuario"/>
+                        <p class="userForm-input-error">El nombre de usuario solo puede tener letas, numero</p>
+                    </div>
+
+                    <!-- Campos para la contraseña -->
+                    <div class="userForm-group" id="group-contra">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" placeholder="Ingrese su contraseña"/>
+                        <p class="userForm-input-error">La contraseña tiene que ser de 4 a 12 digitos</p>
+                    </div>
+
+                    <!-- Campos para la confirmacion de contraseña -->
+                    <div class="userForm-group" id="group-contra2">
+                        <label for="password2">Confirmar contraseña</label>
+                        <input type="password" id="password2" name="password2" placeholder="Repita su contraseña"/>
+                        <p class="userForm-input-error">Ambas contraseñas deben ser iguales</p>
+                    </div>
+
+                    <!-- Campos para el administrador -->
+                    <div class="userForm-group" id="adminCodeField">
+                        <label for="adminCode">Código de Adminikstrador</label>
+                        <input type="text" id="adminCode" name="adminCode" placeholder="Ingrese su código"/>
+                        <p class="userForm-input-error">El teléfono solo puede contener numero y maximo 10</p>
+                    </div>
+
+                    <!-- Mensaje de error -->
+                    <div class="userForm-group" id="userForm-mensaje">
+                      <p><i class="fas fa-exclamation-triangle"></i><b>Error:</b> Por favor rellena el formulario correctamente</p>
+                    </div>
+
+                    <br><br>
+                    <!-- Botón de envío -->
+                    <div class="userForm-group">
+                        <button type="submit" id="btnExportar" value="Enviar" name="send">Enviar</button>
+                        <p class="userForm-mensaje-exito" id="userForm-mensaje-exito">Te haz registrado de manera exitosa</p>
+                    </div>
+
+                </div>
+            
+                <div class="column">
+                    <img class="imagen" src="https://png.pngtree.com/background/20211216/original/pngtree-agricultural-planting-greenhouse-vegetables-photographs-picture-image_1522905.jpg" alt="invernadero">
+                    <!-- Boton para ir al inicio de sesion -->
+                    <div class="userForm-group">
+                        <button id="btnRedirigir" type="button" onclick="window.location.href='InicioSesion/formulario.html'">Inicio de sesion</button>
+                    </div>
+                </div>
+            </div>
+            </fieldset>
+            </fieldset>
+        </form>
+    </div>
+    <script src="ValidaRegistro.js"></script>
+</body>
+</html>

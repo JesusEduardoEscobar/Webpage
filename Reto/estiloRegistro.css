@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.texto {
+    font-family: Libre Baskerville; 
+    font-size: 40px; 
+    margin-bottom: 20px; 
+    display: flex; 
+    justify-content: center; 
+    align-items:center;
+    
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.imagen {
+    display: block;       /* Asegura que la imagen sea un bloque */
+    margin-left: auto;    /* Margen izquierdo automático para centrado */
+    margin-right: auto;   /* Margen derecho automático para centrado */
+    padding: 10px;         /* Espaciado interno */
+    max-width: 95%;      /* Asegura que la imagen no exceda el contenedor */
+}
+
+
+.container {
+    background-color: rgba(249, 237, 213, 0.788);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 80%;
+    width: 100%;
+    align-self: center;
+    align-items: center;
+}
+
+.userForm-group {
+    margin-bottom: 15px;
+}
+
+.userForm-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.userForm-group input {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 90%;
+    padding: 10px;
+    background-color: #263868;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #91b2f8;
+}
+
+#adminCodeField {
+    display: none;
+    margin-top: 20px;
+}
+
+label {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+select {
+    width: 98%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.radio {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Errores */
+
+.userForm-input-error {
+    font-size: 12px;
+    margin-bottom: 0;
+    display: none; /* Desaparece el label */
+}
+
+.userForm-input-error-activo {
+    display: block; /* Aparece el label */
+}
+
+.userForm-validacion-estado {
+    position: absolute;
+    right: 10px;
+    bottom: 15px;
+    z-index: 100;
+    font-size: 16px;
+    opacity: 0;
+}
+
+/* Validacion */
+
+.userForm-mensaje-activo {
+    display: block;
+}
+
+.userForm-mensaje p {
+    margin: 0;
+}
+
+.userForm-mensaje-exito {
+    font-size: 14px;
+    color: #119200;
+    display: none;
+}
+
+.userForm-mensaje-exito-activo {
+    display: block;
+}
+
+.userForm-group-correcto .userForm-validacion-estado {
+    color: #1ED12D;
+    opacity: 1;
+}
+
+.userForm-group-incorrecto .userFormulario__label {
+    color: #BB2929;
+}
+
+.userForm-group-incorrecto .userFormulario__validacion-estado {
+    color: #BB2929;
+    opacity: 1;
+}
+
+.userForm-group-incorrecto .userFormulario__input {
+    border: 3px solid #BB2929;
+}
+
+/* Columna */
+.row::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.column{
+    float: left;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
