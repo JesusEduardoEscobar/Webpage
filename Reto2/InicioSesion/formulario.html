@@ -1,0 +1,66 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="estilo.css">
+        <title>Selección de Usuario</title>
+    </head>
+    <body>
+        <div class="container">
+            <form id="userForm" method="POST" action="consulta.php">
+                <h1>Seleccione el tipo de usuario</h1>
+
+                <!-- Selecccion del tipo de usuario -->
+                <label for="userType" class="userForm_label">Seleccione el tipo de usuario:</label>
+                <br>
+                <div class="userForm_group" id="group_user">
+                    <div class="select-container">
+                        <select name="user" id="user" onchange="mostrar(this)" class="userForm_input" title="Selecciona el tipo de usuario">
+                            <option value="">Seleccionar</option>
+                            <option value="User">Usuario</option>
+                            <option value="Admin">Administrador</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Campos para el usuario -->
+                <div class="userForm_group" id="group_nombre">
+                    <label for="username" class="userForm_label">Nombre de Usuario</label>
+                    <input class="userForm_input" type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre de usuario"/>
+                </div>
+
+                <!-- Campos para la contraseña -->
+                <div class="userForm_group" id="group_contra">
+                    <label for="password" class="userForm_label">Contraseña</label>
+                    <input class="userForm_input" type="password" id="contra" name="contra" placeholder="Ingrese su contraseña"/>
+                </div>
+
+                <!-- Campos para el administrador -->
+                <div class="userForm_group" id="group_codigo">
+                    <label for="adminCode" class="userForm_label">Código de Administrador</label>
+                    <input class="userForm_input" type="text" id="codigo" name="codigo" placeholder="Ingrese su código"/>
+                </div>
+
+                <!-- Mensaje de error -->
+                <div class="userForm_mensaje" id="userForm_mensaje">
+                  <p><i class="fas fa-exclamation-triangle"></i><b>Error:</b> Por favor ingrese/rellene los datos del formulario correctamente correctamente</p>
+                </div>
+
+                <br><br>
+
+                <!-- Botón de envío -->
+                <div class="userForm_group">
+                    <div class="button-container">
+                        <button class="userForm_btn" type="submit" id="btnExportar" value="Enviar" name="send">Enviar</button>
+                        <p class="userForm_mensaje-exito" id="userForm_mensaje-exito">Te haz registrado de manera exitosa</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script src="validar.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <!-- Link para la union con la base de datos -->
+    </body>
+    </html>

@@ -1,0 +1,102 @@
+body {
+  font-family: Arial, sans-serif;
+  background-image: url("https://png.pngtree.com/background/20211216/original/pngtree-agricultural-planting-greenhouse-vegetables-photographs-picture-image_1522905.jpg");
+  background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.userForm_group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.userForm_group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.userForm_input {
+  width: 90%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button-container{
+  display: grid;
+  place-items: center;
+}
+
+.userForm_btn {
+  width: 50%;
+  background-color: #263868;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0px;
+}
+
+.userForm_btn:hover {
+  background-color: #91b2f8;
+}
+
+#group_codigo {
+  display: none;
+  margin-top: 20px;
+}
+
+.userForm_label {
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.userForm_mensaje-exito {
+  font-size: 14px;
+  color: #119200;
+  display: none;
+}
+
+.userForm_mensaje-exito-activo {
+  display: block;
+}
+
+/* Validacion */
+.userForm_mensaje {
+  height: 45px;
+  line-height: 45px;
+  background: #F66060;
+  padding: 0 15px;
+  border-radius: 3px;
+  display: none;
+}
+
+.userForm_mensaje-activo {
+  display: block;
+}
+
+.userForm_mensaje p {
+  margin: 0;
+}
+
+.userForm_mensaje-exito {
+  font-size: 14px;
+  color: #119200;
+  display: none;
+}
