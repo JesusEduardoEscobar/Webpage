@@ -9,23 +9,26 @@ function mostrar(select) {
 }
 
 document.getElementById("userForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+
     $.post('/consulta.php', {
         user: $('#user').val(),
         nombre: $('#nombre').val(),
         contra: $('#contra').val(),
         codigo: $('#codigo').val()
-    }).done(function(response) {
+    }, function(response) {
         console.log("Datos enviados exitosamente:", response);
+
         if (response.success) {
-            document.getElementById('userForm').reset();
-            document.getElementById('userForm_mensaje-exito').classList.add('userForm_mensaje-exito-activo');
-            setTimeout(() => {
-                document.getElementById('userForm_mensaje-exito').classList.remove('userForm_mensaje-exito-activo');
-            }, 5000);
+            // Redirect the user to the specified URL
+            window.location.href = response.redirect;
         } else {
-            console.error("Error en la respuesta del servidor:", response.message);
+            // Show an error message if login failed
+            alert(response.message);
         }
-    }).fail(function(jqXHR, textStatus, errorThrown) {
+    }, 'json') // Specify that the response is JSON so it is parsed automatically
+    .fail(function(jqXHR, textStatus, errorThrown) {
         console.error("Error en la solicitud:", textStatus, errorThrown);
+        alert("Hubo un error al enviar los datos. Inténtalo de nuevo.");
     });
 });

@@ -16,15 +16,9 @@ if ($usuario == 'Admin') {
     $usuario = 'User';
 }
 
-$stmt = $conn->prepare("INSERT INTO usuarios (nombre_usuario, contrasena, tipo_usuario, acceso_visualizacion, control_actuador, codigo_admin) VALUES (?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssiiis", $nombre, $contrasena, $usuario, $acceso_visualizacion, $control_actuador, $codigo);
+$datos = ("INSERT INTO usuarios (nombre_usuario, contrasena, tipo_usuario, acceso_visualizacion, control_actuador, codigo_admin) VALUES ('$nombre', '$contrasena', '$usuario', '$acceso_visualizacion', '$control_actuador', '$codigo')");
 
-if ($stmt->execute()) {
-    echo "Nuevo registro creado con éxito";
-} else {
-    echo "Error: " . $stmt->error;
-}
+mysqli_query($conn, $datos);
 
-$stmt->close();
-$conn->close();
+mysqli_close($conn);
 ?>

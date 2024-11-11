@@ -15,6 +15,7 @@ const campos = {
     user: false,
     nombre: false,
     contra: false,
+    contra2: false,
     codigo: false
 }
 
@@ -89,6 +90,7 @@ const validarContra = () => {
         document.querySelector('#group_contra2 i').classList.add('fa-times-circle');
         document.querySelector('#group_contra2 .userForm_input-error').classList.add('userForm_input-error-activo');
         campos['contra'] = false;
+        campos['contra2'] = false;
     } else {
         document.getElementById('group_contra2').classList.remove('userForm_group-incorrecto');
         document.getElementById('group_contra2').classList.add('userForm_group-correcto');
@@ -96,15 +98,16 @@ const validarContra = () => {
         document.querySelector('#group_contra2 i').classList.remove('fa-times-circle');
         document.querySelector('#group_contra2 .userForm_input-error').classList.remove('userForm_input-error-activo');
         campos['contra'] = true;
+        campos['contra2'] = true;
     }
 }
             
 function redirigir() { 
     const tipoUsuario = document.getElementById('user').value; 
     setTimeout(() => {if (tipoUsuario === 'Admin') { 
-        location.href = 'InicioSesion/administrador/index.html'; 
+        location.href = 'InicioSesion/administrador/templates/index.html'; 
     } else if (tipoUsuario === 'User') { 
-            location.href = 'InicioSesion/Usuario/index.html'; 
+        location.href = 'InicioSesion/Usuario/index.html'; 
     } else { 
         console.error('Tipo de usuario no válido.'); 
     } }, 2000)
@@ -125,7 +128,7 @@ userForm.addEventListener('submit', function (e) {
         codigo: $('#codigo').val()
     });
     //console.log(campos.user + campos.nombre + campos.contra + campos.codigo);
-    if (campos.user && campos.nombre && campos.contra && campos.codigo) {
+    if (campos.user && campos.nombre && campos.contra && campos.contra2 && campos.codigo) {
         userForm.reset();
         document.getElementById('userForm_mensaje-exito').classList.add('userForm_mensaje-exito-activo');
         
