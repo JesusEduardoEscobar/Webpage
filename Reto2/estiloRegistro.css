@@ -1,11 +1,15 @@
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #bfbfbf83;
+  font-family: Arial, Libre Baskerville;
+  background-image: url("https://png.pngtree.com/background/20211216/original/pngtree-agricultural-planting-greenhouse-vegetables-photographs-picture-image_1522905.jpg");
+  background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: rgba(255, 255, 255, 1.0);
 }
 
 main {
@@ -18,12 +22,12 @@ main {
 
 .texto {
     font-family: Libre Baskerville; 
-    font-size: 40px; 
-    margin-bottom: 20px; 
+    font-size: 30px; 
     display: flex; 
     justify-content: center; 
     align-items:center;
-    
+    padding-bottom: 5px;
+    white-space: pre-line;
 }
 
 fieldset {
@@ -32,29 +36,16 @@ fieldset {
     padding: 10px;
 }
 
-.column img { 
-    width: 100%; 
-    height: 600px; 
-} 
-
-.imagen {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px;
-    max-width: 95%;
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
-}
-
 .container {
     display: grid;
     place-items: center;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 10px;
-    background-color: rgba(249, 237, 213, 0.788);
+    /*background-color: darkblue;*/
+    background-color: rgba(110, 120, 130, 0.8);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .userForm_group {
@@ -81,13 +72,13 @@ fieldset {
 
 .userForm_btn {
     width: 50%;
-    background-color: #263868;
-    color: rgb(255, 255, 255);
+    background-color: rgba(249, 237, 213);
     border: none;
     border-radius: 9px;
     cursor: pointer;
     padding: 10px;
     margin: 0px;
+    font-family: Libre Baskerville;
 }
 
 .userForm_btn:hover {
@@ -102,6 +93,7 @@ fieldset {
 .userForm_label {
     margin-top: 20px;
     font-size: 24px;
+    font-family: Libre Baskerville;
 }
 
 /* Errores */
@@ -188,15 +180,22 @@ fieldset {
     border: 3px solid #1ED12D;
 }
 
-/* Columna */
-.row::after{
-    content: "";
-    display: table;
-    clear: both;
+/* Animacion */
+/* Definir keyframes para la animación de aparición */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Puedes ajustar la posición inicial */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Posición final */
+    }
 }
-.column{
-    float: left;
-    width: 50%;
-    justify-content: center;
-    align-items: center;
+
+/* Aplicar la animación al elemento */
+.fade-in {
+    animation: fadeIn 2s ease-in-out; /* Duración y tipo de animación */
+    opacity: 0; /* Asegurarse de que el elemento sea invisible al inicio */
+    animation-fill-mode: forwards; /* Mantener el estado final de la animación */
 }

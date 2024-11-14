@@ -9,14 +9,18 @@
     <title>Selección de Usuario</title>
 </head>
 <body>
+    <div class="fade-in">
     <main>
     <div class="container">
         <form id="userForm" method="post" action="send.php">
             <fieldset>
             <fieldset>
-            <div class="row">
-                <div class="column">
-                    <h1 class="texto">Registrate</h1>
+                    <!-- Texto de inicio -->
+                    <h1 class="texto">
+                        Ya tienes una cuenta? 
+                        No?, Y que esperas 
+                        para Registrate</h1>
+
                     <!-- Selecccion del tipo de usuario -->
                     <label for="userType" class="userForm_label">Seleccione el tipo de usuario:</label>
                     <br>
@@ -85,12 +89,6 @@
                             <button class="userForm_btn" id="btnRedirigir" type="button" onclick="window.location.href='InicioSesion/formulario.html'">Inicio de sesion</button>
                         </div>
                     </div>
-                </div>
-            
-                <div class="column">
-                    <img class="imagen" src="https://png.pngtree.com/background/20211216/original/pngtree-agricultural-planting-greenhouse-vegetables-photographs-picture-image_1522905.jpg" alt="invernadero">
-                </div>
-            </div>
             </fieldset>
             </fieldset>
         </form>
@@ -99,5 +97,6 @@
     <script src="https://kit.fontawesome.com/ed5759d6f7.js" crossorigin="anonymous"></script> <!-- Links para los diseños de la validadcion -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <!-- Link para la union con la base de datos -->
 </main>
+</h1>   
 </body>
 </html>
