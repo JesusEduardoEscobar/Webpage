@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+    <!-- Librería Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="titulo-container">
@@ -14,23 +16,25 @@
     </div>
 
     <div class="row">
-      <div class="column">
-          <h2>Temperatura</h2>
-          <p id="temperatura">Cargando...</p>
-          <p id="timestamp_temp">Timestamp: Cargando...</p>
-          <button onclick="cambiarEstadoRele(true)">Encender Lampara</button>
-          <button onclick="cambiarEstadoRele(false)">Apagar Ventilador</button>
-      </div>
+        <div class="column">
+            <h2>Temperatura</h2>
+            <canvas id="graficoTemperatura" width="400" height="200"></canvas>
+            <p id="temperatura">Cargando...</p>
+            <p id="timestamp_temp">Timestamp: Cargando...</p>
+            <button onclick="cambiarEstadoRele(true)">Encender Lampara</button>
+            <button onclick="cambiarEstadoRele(false)">Apagar Lampara</button>
+        </div>
 
-      <div class="column">
-          <h2>Humedad</h2>
-          <p id="humedad">Cargando...</p>
-          <p id="timestamp_hum">Timestamp: Cargando...</p>
-          <button onclick="encenderHumidificador()">Encender Humidificador</button>
-      </div>
-  </div>
+        <div class="column">
+            <h2>Humedad</h2>
+                <canvas id="graficoHumedad" width="400" height="200"></canvas>
+            <p id="humedad">Cargando...</p>
+            <p id="timestamp_hum">Timestamp: Cargando...</p>
+            <button onclick="encenderHumidificador()">Encender Humidificador</button>
+        </div>
+    </div>
 
-  <!-- Cargar el archivo JavaScript externo -->
-  <script src="{{ url_for('static', filename='validar.js') }}"></script>
+    <!-- Cargar el archivo JavaScript externo -->
+    <script src="{{ url_for('static', filename='validar.js') }}"></script>
 </body>
 </html>

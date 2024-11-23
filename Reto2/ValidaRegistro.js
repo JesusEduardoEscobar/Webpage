@@ -22,10 +22,10 @@ const campos = {
 function mostrar(select) {
     var adminCode = document.getElementById("group_codigo");
     if (select.value === 'Admin') {
-        adminCode.style.display = 'block';
+        adminCode.classList.add('visible');
         campos['codigo'] = false;
     } else {
-        adminCode.style.display = 'none';
+        adminCode.classList.remove('visible');
         campos['codigo'] = true;
         document.getElementById('codigo').value = '';
     }

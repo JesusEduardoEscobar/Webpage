@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Configuración de la base de datos
 db_config = {
-    'host': '10.43.100.223',  # Por ejemplo: '192.168.1.100'
+    'host': 'http://proxy110.r3proxy.com',  # Por ejemplo: '192.168.1.100'
     'user': 'admin',
     'password': 'admin',
     'database': 'INVERNADERO'
@@ -160,3 +160,49 @@ def obtener_datos():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route('/obtener_historico', methods=['GET'])
+def obtener_historico():
+    """
+    Obtiene los últimos 50 valores de temperatura y humedad de la base de datos.
+    """
+    try:
+        conexion = conectar_base_datos()
+        if conexion is None:
+            return jsonify({'error': 'Error conectando a la base de datos'}), 500
+        
+        cursor = conexion.cursor(dictionary=True)
+        
+        # Consulta para los últimos 50 valores de temperatura
+        consulta_temp = """
+            SELECT valor, fecha_hora 
+            FROM sensor_temperatura 
+            WHERE id_zona = 1 
+            ORDER BY fecha_hora DESC 
+            LIMIT 50
+        """
+        cursor.execute(consulta_temp)
+        temperaturas = cursor.fetchall()
+        
+        # Consulta para los últimos 50 valores de humedad
+        consulta_hum = """
+            SELECT valor, fecha_hora 
+            FROM sensor_humedad_aire 
+            WHERE id_zona = 1 
+            ORDER BY fecha_hora DESC 
+            LIMIT 50
+        """
+        cursor.execute(consulta_hum)
+        humedades = cursor.fetchall()
+        
+        return jsonify({
+            'temperaturas': temperaturas[::-1],  # Invertir para mostrar en orden cronológico
+            'humedades': humedades[::-1]
+        })
+    except mysql.connector.Error as err:
+        print(f"Error obteniendo datos históricos: {err}")
+        return jsonify({'error': str(err)}), 500
+    finally:
+        if conexion and conexion.is_connected():
+            cursor.close()
+            conexion.close()
