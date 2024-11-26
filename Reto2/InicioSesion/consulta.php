@@ -57,9 +57,9 @@
         // Verificar si la consulta devolvió un resultado
         if ($result->num_rows > 0) {
             if ($usuario === "User") {
-                echo json_encode(["success" => true, "redirect" => "http://127.0.0.1:3000/index.html"]);
+                echo json_encode(["success" => true, "redirect" => "http://127.0.0.1:3000/"]);
             } else if ($usuario === "Admin") {
-                echo json_encode(["success" => true, "redirect" => "http://127.0.0.1:5000/index"]);
+                echo json_encode(["success" => true, "redirect" => "http://127.0.0.1:5000/"]);
             }
         } else {
             // Autenticación fallida, mostrar mensaje de error
