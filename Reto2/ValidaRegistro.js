@@ -113,11 +113,6 @@ function redirigir() {
     } }, 2000)
 }
 
-inputs.forEach((input) =>{
-    input.addEventListener('keyup', validarFormulario, validarContra);
-    input.addEventListener('blur', validarFormulario, validarContra);
-});
-
 userForm.addEventListener('submit', function (e) {
     e.preventDefault();
 

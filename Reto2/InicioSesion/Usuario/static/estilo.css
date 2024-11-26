@@ -1,0 +1,125 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    background-image: linear-gradient(rgba(0, 34, 255, 0.4), rgba(242, 0, 255, 0.4)),
+        url(https://www.berger.ca/es/wp-content/uploads/sites/3/2017/05/bkg_invernadero.jpg);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.titulo-container h1 {
+    font-size: 2rem;
+    color: #1e90ff;
+    text-transform: uppercase;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+}
+
+.column {
+    width: 300px; /* Incrementar el ancho */
+    text-align: center;
+    padding: 15px;
+    margin: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    transition: transform 0.2s ease-in-out; /* Animación al pasar el mouse */
+}
+
+.column:hover {
+    transform: translateY(-5px); /* Efecto flotante */
+}
+
+.column h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.imagen {
+    width: 100%;
+    max-width: 180px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 10px 5px;
+}
+
+button:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+}
+
+button:nth-child(1) {
+    background-color: #28a745; /* Verde para encender */
+}
+
+button:nth-child(1):hover {
+    background-color: #218838; /* Verde oscuro al pasar el mouse */
+}
+
+button:nth-child(2) {
+    background-color: #dc3545; /* Rojo para apagar */
+}
+
+button:nth-child(2):hover {
+    background-color: #c82333; /* Rojo oscuro al pasar el mouse */
+}
+
+canvas {
+    width: 100% !important; /* Ajustar al contenedor */
+    height: auto !important;
+    max-width: 400px; /* Limitar el tamaño máximo */
+    margin: 15px auto; /* Centrar el gráfico */
+    display: block; /* Asegura que se centre */
+}
+
+.titulo-container {
+    background-color: rgba(15, 15, 15, 0.9);
+    padding: 20px;
+    border-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 128, 0, 0.2);
+    text-align: center;
+}
+
+.graficos-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.grafico {
+    width: 45%;
+    text-align: center;
+}
+
+@keyframes colorChange {
+    0% { color: #8fc98b; }
+    50% { color: #6da76d; }
+    100% { color: #8fc98b; }
+}

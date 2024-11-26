@@ -12,11 +12,11 @@ document.getElementById("userForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent default form submission
     
     // Validación de formulario
-    var user = $('#user').val();
-    var nombre = $('#nombre').val();
-    var contra = $('#contra').val();
-    var codigo = $('#codigo').val();
-    var errorMessage = '';
+    const user = $('#user').val();
+    const nombre = $('#nombre').val();
+    const contra = $('#contra').val();
+    const codigo = $('#codigo').val();
+    const errorMessage = '';
 
     if (!user || !nombre || !contra || (user === 'Admin' && !codigo)) {
         errorMessage = 'Por favor, complete todos los campos requeridos.';
@@ -27,7 +27,7 @@ document.getElementById("userForm").addEventListener("submit", function(event) {
         return;
     }
 
-    $.post('/consulta.php', {
+    $.post('consulta.php', {
         user: user,
         nombre: nombre,
         contra: contra,

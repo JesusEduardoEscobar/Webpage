@@ -258,29 +258,6 @@ function cambiarEstadoRele(nuevoEstado) {
      });
 }
 
-// Cambiar el estado del relé
-function cambiarEstadoRele(nuevoEstado) {
-    fetch('/cambiar_estado_rele', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ estado: nuevoEstado })
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error en la respuesta del servidor');
-            }
-            return response.json();
-        })
-        .then(data => {
-            alert(data.message);
-        })
-        .catch(error => {
-            console.error("Error al cambiar el estado del relé:", error);
-        });
-}
-
 // Inicializar gráficos al cargar la página
 inicializarGraficas();
 
