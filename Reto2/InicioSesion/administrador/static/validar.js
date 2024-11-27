@@ -238,29 +238,6 @@ function actualizarGraficos() {
 // Cambiar el estado del relé
 function cambiarEstadoRele(nuevoEstado) {
     fetch('/cambiar_estado_rele', {
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json'
-         },
-         body : JSON.stringify({ estado:nuevoEstado })
-     })
-     .then(response =>{
-         if(!response.ok){
-             throw new Error('Error en la respuesta del servidor');
-         }
-         return response.json();
-     })
-     .then(data =>{
-         alert(data.message);
-     })
-     .catch(error =>{
-         console.error("Error al cambiar el estado del relé:", error);
-     });
-}
-
-// Cambiar el estado del relé
-function cambiarEstadoRele(nuevoEstado) {
-    fetch('/cambiar_estado_rele', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -284,8 +261,8 @@ function cambiarEstadoRele(nuevoEstado) {
 // Inicializar gráficos al cargar la página
 inicializarGraficas();
 
-// Actualizar gráficos cada 2 segundos con datos históricos
-setInterval(actualizarGraficos ,5000); // Cambiado a cada 2 segundos
+// Actualizar gráficos cada 5 segundos con datos históricos
+setInterval(actualizarGraficos ,5000);
 
 // Llamar a las funciones iniciales al cargar la página
 actualizarGraficos();

@@ -4,8 +4,14 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    // Conexión a la base de datos
-    $conn = new mysqli("localhost", "root", "", "invernadero");
+    $host = 'raspberrypi-mariadb.at.remote.it'; // Hostname
+    $port = 33000; // Port
+    $user = 'admin'; // Username
+    $password = 'admin'; // Password
+    $database = 'INVERNADERO'; // Database name
+
+    // Create connection
+    $conn = new mysqli($host, $user, $password, $database, $port);
 
     // Verifica la conexión
     if ($conn->connect_error) {
