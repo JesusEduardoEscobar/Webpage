@@ -1,4 +1,4 @@
-    let graficoTemperatura;
+let graficoTemperatura;
 let graficoTemperaturaSuelo;
 let graficoHumedad;
 let graficoHumedadSuelo;
@@ -238,8 +238,8 @@ function actualizarGraficos() {
 // Inicializar gráficos al cargar la página
 inicializarGraficas();
 
-// Actualizar gráficos cada 2 segundos con datos históricos
-setInterval(actualizarGraficos ,5000); // Cambiado a cada 2 segundos
+// Actualizar gráficos cada 5 segundos con datos históricos
+setInterval(actualizarGraficos ,5000);
 
 // Llamar a las funciones iniciales al cargar la página
 actualizarGraficos();

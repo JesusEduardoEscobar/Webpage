@@ -21,6 +21,8 @@
             <canvas id="graficoTemperatura"></canvas>
             <p>Temperatura: <span id="temperatura"></span></p>
             <p><span id="timestamp_temp"></span></p>
+            <button onclick="cambiarEstadoRele2(true)">Encender Ventilador</button>
+            <button onclick="cambiarEstadoRele2(false)">Apagar Ventilador</button>
         </div>
 
         <div class="column">
@@ -35,6 +37,8 @@
             <canvas id="graficoHumedad"></canvas>
             <p>Humedad: <span id="humedad"></span></p>
             <p><span id="timestamp_hum"></span></p>
+            <button onclick="cambiarEstadoRele3(true)">Encender Humificador</button>
+            <button onclick="cambiarEstadoRele3(false)">Apagar Humificador</button>
         </div>
 
         <div class="column">
@@ -42,15 +46,17 @@
             <canvas id="graficoHumedadSuelo"></canvas>
             <p>Humedad: <span id="humedad_suelo"></span></p>
             <p><span id="timestamp_hum_suelo"></span></p>
+            <button onclick="cambiarEstadoReleRiego(true)">Encender riego</button>
+            <button onclick="cambiarEstadoReleRiego(false)">Apagar riego</button>
         </div>
 
         <div class="column">
             <h2>Intensidad de luz</h2>
             <canvas id="graficoIntensidadLuz"></canvas>
-            <p>Luz: <span id="intensidad_luz"></span> lux</p>
-            <p><span id="timestamp_intensidadx"></span></p>
-            <button onclick="cambiarEstadoRele(true)">Encender Lampara</button>
-            <button onclick="cambiarEstadoRele(false)">Apagar Lampara</button>
+            <p>Luz: <span id="intensidad_luz"></span></p>
+            <p><span id="timestamp_intensidad"></span></p>
+            <button onclick="cambiarEstadoRele1(true)">Encender Lampara</button>
+            <button onclick="cambiarEstadoRele1(false)">Apagar Lampara</button>
         </div>
 
         <div class="column">
@@ -59,8 +65,16 @@
             <p>pH: <span id="phSuelo"></span></p>
             <p><span id="timestamp_ph"></span></p>
         </div>
+        
+        <div class="column">
+            <h2>Datos de GDD</h2>
+            <p>Gdd acumulado: <span id="gdd">1000</span></p>
+            <p>Gdd necesario: <span id="gdd_dias">1200</span></p>
+            <p>Dias para cosecha: <sapn id="dias">20</sapn></p>
+        </div>
     </div>
 
+        <button class="botonAlinear" onclick="javascript:history.back()" ><h3><B>Regresar</B></h3></button>
     <script src="{{ url_for('static', filename='validar.js') }}"></script>
 </body>
 </html>

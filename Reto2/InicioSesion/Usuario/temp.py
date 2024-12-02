@@ -194,7 +194,7 @@ def obtener_intensidad_luz():
         # Consulta para obtener la última temperatura registrada en la zona 1
         consulta = """
             SELECT valor, fecha_hora 
-            FROM sensor_intensidad_luz 
+            FROM  sensor_intensidad_luz 
             WHERE id_zona = 1 
             ORDER BY fecha_hora DESC 
             LIMIT 1
@@ -255,7 +255,40 @@ def obtener_ph_suelo():
         if conexion and conexion.is_connected():
             cursor.close()
             conexion.close()
-            
+
+def cambiar_estado_rele(nuevo_estado):
+    """
+    Cambia el estado del relé en la base de datos
+    Parámetros:
+        nuevo_estado: True para encender, False para apagar
+    """
+    try:
+        conexion = conectar_base_datos()
+        if conexion is None:
+            return False
+        
+        cursor = conexion.cursor()
+        
+        # Insertar nuevo estado del relé
+        consulta = """
+            INSERT INTO actuador_rele1 
+            (nombre, id_zona, fecha_hora, estado) 
+            VALUES (%s, %s, %s, %s)
+        """
+        cursor.execute(consulta, ('Rele1_Lampara_Z1', 1, datetime.now(), nuevo_estado))
+        
+        conexion.commit()
+        print(f"Relé {'ENCENDIDO' if nuevo_estado else 'APAGADO'} exitosamente")
+        return True
+        
+    except mysql.connector.Error as err:
+        print(f"Error cambiando estado del relé: {err}")
+        return False
+    finally:
+        if conexion and conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
 @app.route('/')
 def index():
     return render_template('index.html')

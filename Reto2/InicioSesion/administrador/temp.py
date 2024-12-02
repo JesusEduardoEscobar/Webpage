@@ -1,6 +1,12 @@
-from flask import Flask, render_template, jsonify, request
+import subprocess
+from flask import Flask, render_template, jsonify, request, send_file
 import mysql.connector
 from datetime import datetime
+import base64
+from io import BytesIO
+from PIL import Image
+import os
+import requests
 
 app = Flask(__name__)
 
@@ -12,6 +18,13 @@ db_config = {
     'password': 'admin',
     'database': 'INVERNADERO'
 }
+
+# Ruta para almacenar las imágenes (si decides almacenar localmente)
+DIRECTORIO_IMAGENES = "./imagenes"
+os.makedirs(DIRECTORIO_IMAGENES, exist_ok=True)
+
+# Configuración de la Raspberry Pi para capturas y procesamientos
+RASPBERRY_PI_URL = "http://raspberrypi.local:5000"  # Cambia esto si la IP es diferente
 
 def conectar_base_datos():
     """Establece conexión con la base de datos"""
@@ -256,7 +269,91 @@ def obtener_ph_suelo():
             cursor.close()
             conexion.close()
 
-def cambiar_estado_rele(nuevo_estado):
+def gdd_cantidad():
+    try:
+        conexion = conectar_base_datos()
+        if conexion is None:
+            return None, None
+        
+        cursor = conexion.cursor(dictionary=True)
+        consulta = """
+            SELECT gdd 
+            FROM zona
+            WHERE id_zona = 1 
+            LIMIT 1
+        """
+        cursor.execute(consulta)
+        resultado = cursor.fetchone()
+        if resultado:
+            return resultado['gdd']
+        print("No se encontraron registros del ph del suelo")
+        return None, None
+        
+    except mysql.connector.Error as err:
+        print(f"Error consultando gdd: {err}")
+        return None, None
+    finally:
+        if conexion and conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def gdd_cosecha():
+    try:
+        conexion = conectar_base_datos()
+        if conexion is None:
+            return None, None
+        
+        cursor = conexion.cursor(dictionary=True)
+        consult = """
+            SELECT gdd_for_harvest
+            FROM zona
+            WHERE id_zona = 1 
+            LIMIT 1
+        """
+        cursor.execute(consult)
+        resultado = cursor.fetchone()
+        if resultado:
+            return resultado['gdd_for_harvest']
+        print("No se encontraron registros del ph del suelo")
+        return None, None
+        
+    except mysql.connector.Error as err:
+        print(f"Error consultando gdd_for_harvest: {err}")
+        return None, None
+    finally:
+        if conexion and conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def dias_cosecha():
+    try:
+        conexion = conectar_base_datos()
+        if conexion is None:
+            return None, None
+        
+        cursor = conexion.cursor(dictionary=True)
+        consulta = """
+            SELECT est_days_harvest
+            FROM zona
+            WHERE id_zona = 1 
+            LIMIT 1
+        """
+        cursor.execute(consulta)
+        resultado = cursor.fetchone()
+        if resultado:
+            return resultado['est_days_harvest']
+        print("No se encontraron registros del ph del suelo")
+        return None, None
+        
+    except mysql.connector.Error as err:
+        print(f"Error consultando est_days_harvest: {err}")
+        return None, None
+    finally:
+        if conexion and conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def cambiar_estado_rele1(nuevo_estado):
     """
     Cambia el estado del relé en la base de datos
     Parámetros:
@@ -278,7 +375,7 @@ def cambiar_estado_rele(nuevo_estado):
         cursor.execute(consulta, ('Rele1_Lampara_Z1', 1, datetime.now(), nuevo_estado))
         
         conexion.commit()
-        print(f"Relé {'ENCENDIDO' if nuevo_estado else 'APAGADO'} exitosamente")
+        print(f"Relé 1 {'ENCENDIDO' if nuevo_estado else 'APAGADO'} exitosamente")
         return True
         
     except mysql.connector.Error as err:
@@ -289,16 +386,139 @@ def cambiar_estado_rele(nuevo_estado):
             cursor.close()
             conexion.close()
 
+def cambiar_estado_rele2(nuevo_estado):
+    """
+    Cambia el estado del relé en la base de datos
+    Parámetros:
+        nuevo_estado: True para encender, False para apagar
+    """
+    try:
+        conexion = conectar_base_datos()
+        if conexion is None:
+            return False
+        
+        cursor = conexion.cursor()
+        
+        # Insertar nuevo estado del relé
+        consulta = """
+            INSERT INTO actuador_rele2 
+            (nombre, id_zona, fecha_hora, estado) 
+            VALUES (%s, %s, %s, %s)
+        """
+        cursor.execute(consulta, ('Rele2_Ventilador_Z1', 1, datetime.now(), nuevo_estado))
+        
+        conexion.commit()
+        print(f"Relé 2 {'ENCENDIDO' if nuevo_estado else 'APAGADO'} exitosamente")
+        return True
+        
+    except mysql.connector.Error as err:
+        print(f"Error cambiando estado del relé: {err}")
+        return False
+    finally:
+        if conexion and conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def cambiar_estado_rele3(nuevo_estado):
+    """
+    Cambia el estado del relé en la base de datos
+    Parámetros:
+        nuevo_estado: True para encender, False para apagar
+    """
+    try:
+        conexion = conectar_base_datos()
+        if conexion is None:
+            return False
+        
+        cursor = conexion.cursor()
+        
+        # Insertar nuevo estado del relé
+        consulta = """
+            INSERT INTO actuador_rele3
+            (nombre, id_zona, fecha_hora, estado) 
+            VALUES (%s, %s, %s, %s)
+        """
+        cursor.execute(consulta, ('Rele3_Humificador_Z1', 1, datetime.now(), nuevo_estado))
+        
+        conexion.commit()
+        print(f"Relé 3 {'ENCENDIDO' if nuevo_estado else 'APAGADO'} exitosamente")
+        return True
+        
+    except mysql.connector.Error as err:
+        print(f"Error cambiando estado del relé: {err}")
+        return False
+    finally:
+        if conexion and conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def cambiar_estado_riego(nuevo_estado):
+    """
+    Cambia el estado del relé en la base de datos
+    Parámetros:
+        nuevo_estado: True para encender, False para apagar
+    """
+    try:
+        conexion = conectar_base_datos()
+        if conexion is None:
+            return False
+        
+        cursor = conexion.cursor()
+        
+        # Insertar nuevo estado del relé
+        consulta = """
+            INSERT INTO actuador_riego
+            (nombre, id_zona, fecha_hora, estado) 
+            VALUES (%s, %s, %s, %s)
+        """
+        cursor.execute(consulta, ('Rele_riego', 1, datetime.now(), nuevo_estado))
+        
+        conexion.commit()
+        print(f"Relé 4 {'ENCENDIDO' if nuevo_estado else 'APAGADO'} exitosamente")
+        return True
+        
+    except mysql.connector.Error as err:
+        print(f"Error cambiando estado del relé: {err}")
+        return False
+    finally:
+        if conexion and conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+
+# Rutas para la lógica del servidor (no modificadas)
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/cambiar_estado_rele', methods=['POST'])
-def cambiar_estado():
+@app.route('/cambiar_estado_rele1', methods=['POST'])
+def cambiar_estado1():
     estado = request.json.get('estado')
-    exito = cambiar_estado_rele(estado)
+    exito = cambiar_estado_rele1(estado)
     mensaje = "Estado cambiado exitosamente" if exito else "Error al cambiar el estado"
     return jsonify({'exito': exito, 'message': mensaje})
+
+@app.route('/cambiar_estado_rele2', methods=['POST'])
+def cambiar_estado2():
+    estado = request.json.get('estado')
+    exito = cambiar_estado_rele2(estado)
+    mensaje = "Estado cambiado exitosamente" if exito else "Error al cambiar el estado"
+    return jsonify({'exito': exito, 'message': mensaje})
+
+@app.route('/cambiar_estado_rele3', methods=['POST'])
+def cambiar_estado3():
+    estado = request.json.get('estado')
+    exito = cambiar_estado_rele3(estado)
+    mensaje = "Estado cambiado exitosamente" if exito else "Error al cambiar el estado"
+    return jsonify({'exito': exito, 'message': mensaje})
+
+@app.route('/cambiar_estado_riego', methods=['POST'])
+def cambiar_estadoriego():
+    estado = request.json.get('estado')
+    exito = cambiar_estado_riego(estado)
+    mensaje = "Estado cambiado exitosamente" if exito else "Error al cambiar el estado"
+    return jsonify({'exito': exito, 'message': mensaje})
+
 
 @app.route('/obtener_datos', methods=['GET'])
 def obtener_datos():
@@ -308,8 +528,10 @@ def obtener_datos():
     humedad_suelo, timestamp_hum_suelo = obtener_ultima_humedad_suelo()
     intensidad, timestamp_intensidad = obtener_intensidad_luz()
     ph, timestamp_ph = obtener_ph_suelo()
+    gdd = gdd_cantidad()
+    gdd_dias = gdd_cosecha()
+    dias = dias_cosecha()
 
-    # Asegurar que no se retornen valores nulos
     return jsonify({
         'temperaturaAire': temperatura or "No disponible",
         'timestamp_temp': timestamp_temp or "No disponible",
@@ -322,12 +544,11 @@ def obtener_datos():
         'intensidad_luz': intensidad or "No disponible",
         'timestamp_intensidad': timestamp_intensidad or "No disponible",
         'ph_suelo': ph or "No disponible",
-        'timestamp_ph': timestamp_ph or "No disponible"
+        'timestamp_ph': timestamp_ph or "No disponible",
+        'gdd': gdd or "No disponible",
+        'gdd_dias': gdd_dias or "No disponible",
+        'dias': dias or "No disponible"
     })
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 @app.route('/obtener_historico', methods=['GET'])
 def obtener_historico():
@@ -422,3 +643,6 @@ def obtener_historico():
         if conexion and conexion.is_connected():
             cursor.close()
             conexion.close()
+
+if __name__ == '__main__':
+    app.run(debug=True)

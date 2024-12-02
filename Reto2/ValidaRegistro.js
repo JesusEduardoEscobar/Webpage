@@ -21,7 +21,7 @@ function mostrar(select) {
     if (select.value === 'Admin') {
         adminCode.classList.add('visible');
         campos['codigo'] = false; // Resetear el estado del campo código
-    } else {
+    } else if(select.value === 'User') {
         adminCode.classList.remove('visible');
         campos['codigo'] = true; // Marcar como válido si no es Admin
         document.getElementById('codigo').value = ''; // Limpiar el campo código
@@ -34,7 +34,8 @@ const validarFormulario = (e) => {
             validacionCampos(expresiones.user, e.target, 'user');
             if (e.target.value === "Admin") {
                 campos['codigo'] = false; // Si es Admin, no se valida el código
-            } else {
+            } 
+            if(e.target.value === 'User') {
                 campos['codigo'] = true; // Si no es Admin, se marca como válido
             }
             break;
